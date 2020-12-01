@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Exemplo real</h2>
+
+<p>Neste exemplo estamos esperando uma API responder.</p>
+
+<p id="demo"></p>
+<input type="button" value="Resultado 1" onclick="vai()">
+
+<input type="button" value="Resultado 2" onclick="doThis(andThenThis)">
+
+<script>
+
+const data = JSON.stringify({
+  first: 'Marcelo',
+  last: 'Telles'
+})
+
+const xhr = new XMLHttpRequest()
+
+//solução1 https://flaviocopes.com/how-to-post-api-javascript/
+xhr.addEventListener('readystatechange', function() {
+  if (this.readyState === this.DONE) {
+	console.log("=>"+xhr.response);
+	//aqui temos a resposta ☝☝☝
+  }
+})
+
+xhr.open('POST', 'https://reqres.in/api/users/add')
+xhr.setRequestHeader('content-type', 'application/json')
+xhr.send(data);
+console.log("=> ⛔"+xhr.response);
+
+function vai(){
+	console.log("=> ✅ "+xhr.response);
+}
+
+var temp=0;
+
+//solução2
+function andThenThis(v) {
+  console.log("=> 💥 "+v);
+}
+
+function doThis(callback) {
+  const data2 = JSON.stringify({
+	  first: 'Chaves',
+	  last: 'Bolanhos'
+	})
+  const xhrExemplo = new XMLHttpRequest();
+  xhrExemplo.addEventListener('readystatechange', function() {
+	  if (this.readyState === this.DONE) {
+		console.log(this.status);
+		callback(this.responseText);
+		//aqui temos a resposta ☝☝☝
+	  }
+	})
+	xhrExemplo.open('POST', 'https://reqres.in/api/users/add')
+	xhrExemplo.setRequestHeader('content-type', 'application/json')
+	xhrExemplo.send(data2);
+}
+
+
+</script>
+
+</body>
+</html>

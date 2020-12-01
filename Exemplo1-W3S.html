@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Function Sequence</h2>
+
+<p>JavaScript functions are executed in the sequence they are called.</p>
+
+<p id="demo"></p>
+
+<script>
+//https://medium.com/totvsdevelopers/entendendo-fun%C3%A7%C3%B5es-callback-em-javascript-7b500dc7fa22
+
+function myDisplayer(some) {
+  document.getElementById("demo").innerHTML = some;
+}
+
+function myFirst() {
+  myDisplayer("Hello");
+  console.log("2"+new Date());
+}
+
+function mySecond() {
+  myDisplayer("Goodbye");
+}
+
+//vemos SOMENTE o segundo
+//myFirst();
+//mySecond();
+
+//vemos o segundo, 2 seg depois vemos o primeiro
+setTimeout(() => myFirst(),2000);
+mySecond();
+console.log("1"+new Date());
+//mais exemplos https://pt.stackoverflow.com/questions/27177/o-que-%C3%A9-callback
+
+
+
+</script>
+
+</body>
+</html>
